@@ -1,0 +1,226 @@
+{% extends "Base.html" %}
+
+{% block title %}Analyse uploaden{% endblock %}
+
+{% block content %}
+<div class="analyse-upload-page">
+    <section class="analyse-hero">
+        <div>
+            <p class="page-label">GeoTrace Analyse</p>
+            <h1>Afbeelding uploaden</h1>
+            <p>
+                Upload één afbeelding om objecten, tekst en locatie-aanwijzingen te analyseren.
+            </p>
+        </div>
+    </section>
+
+    <section class="upload-card">
+        <form id="uploadForm" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+<!--        <form id="uploadForm" method="post" enctype="multipart/form-data" action="{{ url_for('upload') }}">-->
+            <div class="drop-zone" id="dropZone">
+                <input type="file" id="imageInput" name="image" accept=".jpg,.jpeg,.png,image/jpeg,image/png" hidden>
+
+                <div class="drop-zone-icon">
+                    <span>+</span>
+                </div>
+
+                <h2>Sleep je afbeelding hierheen</h2>
+                <p>of klik om een bestand te selecteren</p>
+                <small>Alleen JPG, JPEG en PNG bestanden zijn toegestaan</small>
+            </div>
+
+            <div class="file-preview-section" id="filePreviewSection">
+                <div class="preview-header">
+                    <h3>Geselecteerd bestand</h3>
+                    <button type="button" class="clear-files-btn" id="clearFilesBtn">Annuleren</button>
+                </div>
+
+                <div class="file-preview-list" id="filePreviewList"></div>
+            </div>
+
+            <div class="upload-actions">
+                <button type="button" class="secondary-btn" id="cancelBtn">Annuleren</button>
+                <button type="submit" class="primary-btn" id="uploadBtn" disabled>Analyse starten</button>
+            </div>
+
+            <div class="upload-message" id="uploadMessage"></div>
+        </form>
+    </section>
+</div>
+
+<script>
+const dropZone = document.getElementById("dropZone");
+const imageInput = document.getElementById("imageInput");
+const filePreviewSection = document.getElementById("filePreviewSection");
+const filePreviewList = document.getElementById("filePreviewList");
+const uploadBtn = document.getElementById("uploadBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+const clearFilesBtn = document.getElementById("clearFilesBtn");
+const uploadForm = document.getElementById("uploadForm");
+const uploadMessage = document.getElementById("uploadMessage");
+
+let selectedFiles = [];
+
+dropZone.addEventListener("click", () => {
+    imageInput.click();
+});
+
+dropZone.addEventListener("dragover", event => {
+    event.preventDefault();
+    dropZone.classList.add("drag-over");
+});
+
+dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("drag-over");
+});
+
+dropZone.addEventListener("drop", event => {
+    event.preventDefault();
+    dropZone.classList.remove("drag-over");
+
+    const files = Array.from(event.dataTransfer.files);
+    addFiles(files);
+});
+
+imageInput.addEventListener("change", event => {
+    const files = Array.from(event.target.files);
+    addFiles(files);
+});
+
+cancelBtn.addEventListener("click", () => {
+    clearSelectedFiles();
+});
+
+clearFilesBtn.addEventListener("click", () => {
+    clearSelectedFiles();
+});
+
+// uploadForm.addEventListener("submit", event => {
+//     if (selectedFiles.length === 0 || imageInput.files.length === 0) {
+//         event.preventDefault();
+//         showMessage("Selecteer eerst een afbeelding.", "error");
+//         return;
+//     }
+//
+//     uploadBtn.disabled = true;
+//     uploadBtn.textContent = "Analyse wordt uitgevoerd...";
+//     showMessage("Afbeelding wordt geüpload en geanalyseerd. Even geduld...", "success");
+// });
+
+function addFiles(files) {
+    clearMessage();
+
+    const allowedTypes = ["image/jpeg", "image/png"];
+
+    if (files.length === 0) {
+        return;
+    }
+
+    const file = files[0];
+
+    if (!allowedTypes.includes(file.type)) {
+        selectedFiles = [];
+        imageInput.value = "";
+        renderFilePreview();
+        showMessage("Alleen JPG, JPEG en PNG bestanden zijn toegestaan.", "error");
+        return;
+    }
+
+    selectedFiles = [file];
+
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    imageInput.files = dataTransfer.files;
+
+    renderFilePreview();
+
+    if (files.length > 1) {
+        showMessage("Er kan maar één afbeelding tegelijk worden geselecteerd. Alleen de eerste afbeelding is toegevoegd.", "error");
+    }
+}
+
+function renderFilePreview() {
+    filePreviewList.innerHTML = "";
+
+    if (selectedFiles.length === 0) {
+        filePreviewSection.classList.remove("active");
+        uploadBtn.disabled = true;
+        return;
+    }
+
+    filePreviewSection.classList.add("active");
+    uploadBtn.disabled = false;
+
+    selectedFiles.forEach((file, index) => {
+        const reader = new FileReader();
+
+        reader.onload = event => {
+            const previewItem = document.createElement("div");
+            previewItem.className = "file-preview-item";
+
+            previewItem.innerHTML = `
+                <img src="${event.target.result}" alt="${file.name}">
+                <div class="file-info">
+                    <strong>${file.name}</strong>
+                    <span>${formatFileSize(file.size)}</span>
+                </div>
+                <button type="button" class="remove-file-btn" data-index="${index}">×</button>
+            `;
+
+            filePreviewList.appendChild(previewItem);
+
+            const removeButton = previewItem.querySelector(".remove-file-btn");
+
+            removeButton.addEventListener("click", () => {
+                selectedFiles.splice(index, 1);
+
+                if (selectedFiles.length === 0) {
+                    imageInput.value = "";
+                } else {
+                    const dataTransfer = new DataTransfer();
+
+                    selectedFiles.forEach(selectedFile => {
+                        dataTransfer.items.add(selectedFile);
+                    });
+
+                    imageInput.files = dataTransfer.files;
+                }
+
+                renderFilePreview();
+            });
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+
+function clearSelectedFiles() {
+    selectedFiles = [];
+    imageInput.value = "";
+    renderFilePreview();
+    showMessage("Upload geannuleerd. Er wordt geen analyse gestart.", "success");
+}
+
+function formatFileSize(bytes) {
+    if (bytes < 1024) {
+        return bytes + " B";
+    }
+
+    if (bytes < 1024 * 1024) {
+        return (bytes / 1024).toFixed(1) + " KB";
+    }
+
+    return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+}
+
+function showMessage(message, type) {
+    uploadMessage.textContent = message;
+    uploadMessage.className = "upload-message " + type;
+}
+
+function clearMessage() {
+    uploadMessage.textContent = "";
+    uploadMessage.className = "upload-message";
+}
+</script>
+{% endblock %}

@@ -1,0 +1,279 @@
+/*---------- opera overzicht gast styling ----------*/
+.opera-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 60px;
+    width: 100%;
+    max-width: 1650px;
+    margin: 0 auto;
+    padding: 60px 50px;
+    box-sizing: border-box;
+}
+
+
+/* ---------- KAART ---------- */
+.opera-card {
+    position: relative;
+    margin-top: 30px;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #111827;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+}
+
+.opera-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ---------- AFBEELDING ---------- */
+.opera-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.opera-card:hover .opera-image {
+    transform: scale(1.04);
+}
+
+
+/* ---------- DONKERE OVERLAY ---------- */
+.opera-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+            linear-gradient(
+                    to bottom,
+                    rgba(3, 8, 25, 0.10) 0%,
+                    rgba(3, 8, 25, 0.15) 35%,
+                    rgba(3, 8, 25, 0.50) 65%,
+                    rgba(3, 8, 25, 0.90) 100%
+            );
+    z-index: 1;
+}
+
+
+/* ---------- CONTENT ---------- */
+.opera-card-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 0px 20px 20px;
+    box-sizing: border-box;
+    color: white;
+}
+
+
+/* ---------- GENRE ---------- */
+.opera-genre {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 0 14px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+/* ---------- ONDERSTE INFORMATIE ---------- */
+.opera-info {
+    text-align: center;
+    padding: 10px 10px 0px;
+}
+
+
+/* ---------- TITEL ---------- */
+.opera-info h3 {
+    margin: 0 0 10px;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1;
+    color: white;
+    text-shadow:
+            0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ---------- OMSCHRIJVING ---------- */
+.opera-info p {
+    margin: 0 auto 15px;
+    max-width: 450px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow:
+            0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ---------- BUTTON ---------- */
+.opera-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 22px;
+    border-radius: 30px;
+    /*background: #8b2be2;*/
+    /*background: #0ECCED;*/
+    background: #025EC4;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition:
+            background 0.25s ease,
+            transform 0.25s ease;
+}
+
+.opera-button:hover {
+    /*background: #a342f0;*/
+    background: #043780;
+    transform: translateY(-2px);
+}
+
+.opera-verwijder-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 22px;
+    border-radius: 30px;
+    background: #6D001A;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition:
+            background 0.25s ease,
+            transform 0.25s ease;
+}
+
+.opera-verwijder-button:hover {
+    background: #3C0007;
+    transform: translateY(-2px);
+}
+
+
+/* ---------- OPERA TOEVOEGEN CARD ---------- */
+.opera-toevoegen-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+            linear-gradient(
+                    145deg,
+                    rgba(22, 38, 96, 0.90),
+                    rgba(4, 55, 128, 0.72)
+            );
+
+    border: 1px solid rgba(14, 204, 237, 0.18);
+
+    text-decoration: none;
+    cursor: pointer;
+
+    box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.30),
+            0 0 35px rgba(2, 94, 196, 0.06);
+
+    transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease,
+            border-color 0.3s ease,
+            background 0.3s ease;
+}
+
+.opera-toevoegen-card:hover {
+    background:
+            linear-gradient(
+                    145deg,
+                    rgba(22, 45, 115, 0.95),
+                    rgba(4, 70, 150, 0.82)
+            );
+
+    border-color: rgba(14, 204, 237, 0.45);
+
+    box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.40),
+            0 0 40px rgba(14, 204, 237, 0.10);
+}
+
+.opera-toevoegen-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+            linear-gradient(
+                    to bottom,
+                    rgba(3, 8, 25, 0.10) 0%,
+                    rgba(3, 8, 25, 0.15) 35%,
+                    rgba(3, 8, 25, 0.50) 65%,
+                    rgba(3, 8, 25, 0.90) 100%
+            );
+
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+/* ---------- PLUS ---------- */
+.opera-plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 105px;
+    height: 105px;
+
+    border-radius: 50%;
+
+    background: rgba(3, 8, 18, 0.35);
+    border: 1px solid rgba(14, 204, 237, 0.25);
+
+    color: #0ECCED;
+
+    font-size: 76px;
+    font-weight: 300;
+    line-height: 1;
+
+    box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.25),
+            0 0 25px rgba(14, 204, 237, 0.05);
+
+    transition:
+            transform 0.3s ease,
+            background 0.3s ease,
+            border-color 0.3s ease,
+            box-shadow 0.3s ease;
+}
+
+.opera-toevoegen-card:hover .opera-plus {
+    transform: scale(1.08);
+
+    background: rgba(14, 204, 237, 0.08);
+
+    border-color: rgba(14, 204, 237, 0.55);
+
+    box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.30),
+            0 0 30px rgba(14, 204, 237, 0.15);
+}

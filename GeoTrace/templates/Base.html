@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}GeoTrace{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gebruikers.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analyse_metadata.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ocr.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tijdlijn.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analyse_loading.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vergelijk.css') }}">
+
+</head>
+<body>
+
+{% if session.get("login_id") %}
+    {% if session.get("rol") == "Admin" %}
+        {% include "Navitems/Navbar_admin.html" %}
+    {% elif session.get("rol") == "Gebruiker" %}
+        {% include "Navitems/Navbar_gebruiker.html" %}
+    {% endif %}
+{% endif %}
+
+
+  <section class="content">
+    <header>
+      {% block header %}{% endblock %}
+    </header>
+
+<div class="toast-container">
+  {% for message in get_flashed_messages() %}
+    <div class="toast-message">
+      <span>{{ message }}</span>
+      <button type="button" class="toast-close" onclick="this.parentElement.remove()">×</button>
+    </div>
+  {% endfor %}
+</div>
+
+    {% block content %}{% endblock %}
+  </section>
+</body>
+</html>

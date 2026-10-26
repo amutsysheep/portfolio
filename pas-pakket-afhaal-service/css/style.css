@@ -1,0 +1,2218 @@
+/* ===========================
+   SAMENGEVOGD: CODE 1 (Thomas) + CODE 2 (Groepsgenoot)
+   Niets verwijderd. Alleen 2 typos gefixt zodat het werkt:
+   - x.filter-wrapper -> .filter-wrapper
+   - .alert-succes -> .alert-success
+   =========================== */
+
+/* ===== CODE 1 (JOUW CODE) ===== */
+
+/*globaal*/
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+/*Registratie*/
+/* Achtergrond */
+.registratie-pagina {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #4A70A9;
+    padding: 20px;
+}
+
+/* Kaart */
+.registratie-kaart {
+    width: 100%;
+    max-width: 450px;
+    background: #EFECE3;
+    backdrop-filter: blur(6px);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* Titels */
+.registratie-title {
+    text-align: center;
+    font-size: 26px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.registratie-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+}
+
+/* Formulier */
+.registratie-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/* Inputs */
+.registratie-form input,
+.registratie-form select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+/* Submit button */
+.registratie-form button {
+    padding: 12px;
+    border: none;
+    background: #8FABD4;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.registratie-form button:hover {
+    background: #4A70A9;
+}
+
+/* Al account knop */
+.al_account {
+    text-align: center;
+    font-size: 14px;
+}
+
+.al_account a {
+    color: #8FABD4;
+    font-weight: bold;
+}
+
+.al_account a:hover{
+    color: #4A70A9;
+}
+
+/* Terms tekst */
+.terms {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 11px;
+    color: gray;
+}
+
+/*-----------------------------------courier-beheer--------------------------------------------------*/
+.courier-beheer-pagina{
+    min-height: 100vh;
+    background: #4A70A9;
+    padding: 20px;
+}
+/* Container */
+.courier-beheer-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px;
+}
+
+/* Header */
+.courier-beheer-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.courier-beheer-header h1 {
+    font-size: 32px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.courier-beheer-header p {
+    color: black;
+}
+
+/* Meldingen */
+.message {
+    background: #ffeaa7;
+    color: black;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Tabel */
+.table-wrapper-courier-beheer {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.table-wrapper-courier-beheer table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-wrapper-courier-beheer thead {
+    background: #8FABD4;
+    color: white;
+}
+
+.table-wrapper-courier-beheer th,
+.table-wrapper-courier-beheer td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+/* Rijen */
+.table-wrapper-courier-beheer tbody tr{
+    background: #EFECE3;
+}
+
+.table-wrapper-courier-beheer tbody tr:hover {
+    background: #d2dcea;
+    cursor: pointer;
+}
+
+/* Naam kolom link styling */
+.naam-courier {
+    font-weight: 500;
+    color: black;
+}
+
+/* Actieknoppen */
+.knoppen-courier-beheer {
+    display: flex;
+    gap: 6px;
+}
+
+/* Basis knop styling */
+.knoppen-courier-beheer button,
+.knoppen-courier-beheer a {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Verschillende knoppen */
+.knoppen-courier-beheer .edit {
+    background: #dc2626
+}
+.knoppen-courier-beheer .edit:hover {
+    background: #b91c1c;
+}
+
+.knoppen-courier-beheer .delete {
+    background: #dc2626;
+}
+.knoppen-courier-beheer .delete:hover {
+    background: #b91c1c;
+}
+
+.knoppen-courier-beheer .activate {
+    background: #16a34a;
+}
+.knoppen-courier-beheer .activate:hover {
+    background: #15803d;
+}
+
+/*----------login-pagina----------------------*/
+.login-pagina {
+    background-color: #4A70A9;
+    min-height: 100vh;
+    background: #4A70A9;
+    padding: 20px;
+}
+
+/* Container (dubbel, laten staan) */
+.courier-beheer-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px;
+}
+
+/* Header (dubbel, laten staan) */
+.courier-beheer-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.courier-beheer-header h1 {
+    font-size: 32px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.courier-beheer-header p {
+    color: black;
+}
+
+/* Meldingen (dubbel, laten staan) */
+.message {
+    background: #ffeaa7;
+    color: black;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Tabel (dubbel, laten staan) */
+.table-wrapper-courier-beheer {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.table-wrapper-courier-beheer table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-wrapper-courier-beheer thead {
+    background: #8FABD4;
+    color: white;
+}
+
+.table-wrapper-courier-beheer th,
+.table-wrapper-courier-beheer td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+/* Rijen */
+.table-wrapper-courier-beheer tbody tr{
+    background: #EFECE3;
+}
+
+.table-wrapper-courier-beheer tbody tr:hover {
+    background: #d2dcea;
+    cursor: pointer;
+}
+
+/* Naam kolom link styling */
+.naam-courier {
+    font-weight: 500;
+    color: black;
+}
+
+/* Actieknoppen */
+.knoppen-courier-beheer {
+    display: flex;
+    gap: 6px;
+}
+
+/* Basis knop styling */
+.knoppen-courier-beheer button,
+.knoppen-courier-beheer a {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Verschillende knoppen */
+.knoppen-courier-beheer .edit {
+    background: #dc2626
+}
+.knoppen-courier-beheer .edit:hover {
+    background: #b91c1c;
+}
+
+.knoppen-courier-beheer .delete {
+    background: #dc2626;
+}
+.knoppen-courier-beheer .delete:hover {
+    background: #b91c1c;
+}
+
+.knoppen-courier-beheer .activate {
+    background: #16a34a;
+}
+.knoppen-courier-beheer .activate:hover {
+    background: #15803d;
+}
+
+.login-pagina {
+    background-color: #4A70A9;
+    min-height: 94.1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.login-container {
+    max-width: 450px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    justify-content: flex-start;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 450px;
+    background: #EFECE3;
+    padding: 45px;
+    border-radius: 12px;
+    box-shadow: 0 8px 10px rgba(0,0,0,0.15);
+    animation: loginBounce 0.6s ease-out;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.login-button {
+    width: 100%;
+    background: #8FABD4;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.login-button:hover {
+    background: #4A70A9;
+    color: white;
+}
+
+.login-register-text {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #34495e;
+    font-size: 1.8rem;
+}
+
+.login-button {
+    width: 100%;
+    background: #8FABD4;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.login-button:hover {
+    background: #4A70A9;
+    color: white;
+}
+
+.login-register-text {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.navbar {
+    background: rgba(74, 158, 169, 0.62);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.nav-logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.alert {
+    position: fixed;
+    left: 52%;
+    top: 150px;
+    transform: translateX(-50%);
+    padding: 1.25em 2em;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    z-index: 9999;
+    min-width: 450px;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.alert-danger {
+    background-color: #e74c3c;
+}
+
+/* FIX: succes -> success */
+.alert-success {
+    background-color: #2ecc71;
+}
+
+@keyframes loginBounce {
+    0% { transform: translateY(-40px); opacity: 0; }
+    60% { transform: translateY(10px); opacity: 1; }
+    100% { transform: translateY(0); }
+}
+
+/*---------------afkeuren pop up-------------------------------*/
+.decline-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.hidden {
+    display: none;
+}
+
+.decline-content {
+    background: #fff;
+    padding: 22px;
+    width: 420px;
+    border-radius: 10px;
+}
+
+.decline-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.decline-confirm {
+    background: #d93636;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.decline-cancel {
+    background: #777;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.status-pending {
+    background: #ffecc4;
+    color: #b87500;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 420px;
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* ===== BUTTONS ===== */
+.modal-close {
+    background: #7f8c8d;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: #636e72;
+}
+
+.confirm-btn {
+    background: #f1c40f;
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.confirm-btn:hover {
+    background: #d4ac0d;
+}
+
+.confirm-btn.danger {
+
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    width: 320px;
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ================= COURIER OVERZICHT ================= */
+
+.courier-table-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+}
+
+.courier-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #EFECE3;
+    font-size: 14px;
+}
+
+.courier-table thead {
+    background: #8FABD4;
+    color: #fff;
+}
+
+.courier-table th,
+.courier-table td {
+    padding: 12px 14px;
+    text-align: left;
+}
+
+.courier-table tbody tr:nth-child(even) {
+    background: #e0dbcf;
+}
+
+.courier-table tbody tr:hover {
+    background: #d2dcea;
+}
+
+/* Claim knop */
+.courier-table .claim-btn {
+    background: #16a34a;
+    color: #fff;
+}
+
+.courier-table .claim-btn:hover {
+    background: #15803d;
+}
+
+.pakketten-pagina {
+    max-width: 1100px;
+    margin: 140px auto 40px;
+    padding: 20px;
+    background-color: #EFECE3;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    color: #000;
+    font-family: Arial, sans-serif;
+}
+
+.pakketten-pagina h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+/* FIX: x.filter-wrapper -> .filter-wrapper */
+.filter-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 14px;
+    gap: 4px;
+}
+
+.filter-wrapper label {
+    font-weight: bold;
+}
+
+.filter-wrapper select {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.status-filter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.status-filter label {
+    font-weight: bold;
+}
+
+.status-filter select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* ===== EINDE CODE 1 ===== */
+
+
+/* ===== CODE 2 (GROEPSGENOOT) ===== */
+
+/*globaal*/
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+}
+
+/*Registratie*/
+/* Achtergrond */
+.registratie-pagina {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #4A70A9;
+    padding: 20px;
+}
+
+/* Kaart */
+.registratie-kaart {
+    width: 100%;
+    max-width: 450px;
+    background: #EFECE3;
+    backdrop-filter: blur(6px);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* Titels */
+.registratie-title {
+    text-align: center;
+    font-size: 26px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.registratie-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+}
+
+/* Formulier */
+.registratie-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/* Inputs */
+.registratie-form input,
+.registratie-form select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+/* Submit button */
+.registratie-form button {
+    padding: 12px;
+    border: none;
+    background: #8FABD4;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.registratie-form button:hover {
+    background: #4A70A9;
+}
+
+/* Al account knop */
+.al_account {
+    text-align: center;
+    font-size: 14px;
+}
+
+.al_account a {
+    color: #8FABD4;
+    font-weight: bold;
+}
+
+.al_account a:hover{
+    color: #4A70A9;
+}
+
+/* Terms tekst */
+.terms {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 11px;
+    color: gray;
+}
+
+/*-----------------------------------courier-beheer--------------------------------------------------*/
+.courier-beheer-pagina{
+    min-height: 100vh;
+    background: #4A70A9;
+    padding: 20px;
+}
+/* Container */
+.courier-beheer-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px;
+}
+
+/* Header */
+.courier-beheer-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.courier-beheer-header h1 {
+    font-size: 32px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.courier-beheer-header p {
+    color: black;
+}
+
+/* Meldingen */
+.message {
+    background: #ffeaa7;
+    color: black;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Tabel */
+.table-wrapper-courier-beheer {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.table-wrapper-courier-beheer table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-wrapper-courier-beheer thead {
+    background: #8FABD4;
+    color: white;
+}
+
+.table-wrapper-courier-beheer th,
+.table-wrapper-courier-beheer td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+/* Rijen */
+.table-wrapper-courier-beheer tbody tr{
+    background: #EFECE3;
+}
+
+.table-wrapper-courier-beheer tbody tr:hover {
+    background: #d2dcea;
+    cursor: pointer;
+}
+
+/* Naam kolom link styling */
+.naam-courier {
+    font-weight: 500;
+    color: black;
+}
+
+/* Actieknoppen */
+.knoppen-courier-beheer {
+    display: flex;
+    gap: 6px;
+}
+
+/* Basis knop styling */
+.knoppen-courier-beheer button,
+.knoppen-courier-beheer a {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Verschillende knoppen */
+.knoppen-courier-beheer .edit {
+    background: #dc2626
+}
+.knoppen-courier-beheer .edit:hover {
+    background: #b91c1c;
+}
+
+.knoppen-courier-beheer .delete {
+    background: #dc2626;
+}
+.knoppen-courier-beheer .delete:hover {
+    background: #b91c1c;
+}
+
+.knoppen-courier-beheer .activate {
+    background: #16a34a;
+}
+.knoppen-courier-beheer .activate:hover {
+    background: #15803d;
+}
+
+/*----------login-pagina----------------------*/
+.login-pagina {
+    background-color: #4A70A9;
+    min-height: 100vh;
+    background: #4A70A9;
+    padding: 20px;
+}
+
+/* Container */
+.courier-beheer-container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px;
+}
+
+/* Header */
+.courier-beheer-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.courier-beheer-header h1 {
+    font-size: 32px;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.courier-beheer-header p {
+    color: black;
+}
+
+/* Meldingen */
+.message {
+    background: #ffeaa7;
+    color: black;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Tabel */
+.table-wrapper-courier-beheer {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.table-wrapper-courier-beheer table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-wrapper-courier-beheer thead {
+    background: #8FABD4;
+    color: white;
+}
+
+.table-wrapper-courier-beheer th,
+.table-wrapper-courier-beheer td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+/* Rijen */
+.table-wrapper-courier-beheer tbody tr{
+    background: #EFECE3;
+}
+
+.table-wrapper-courier-beheer tbody tr:hover {
+    background: #d2dcea;
+    cursor: pointer;
+}
+
+/* Naam kolom link styling */
+.naam-courier {
+    font-weight: 500;
+    color: black;
+}
+
+/* Actieknoppen */
+.knoppen-courier-beheer {
+    display: flex;
+    gap: 6px;
+}
+
+/* Basis knop styling */
+.knoppen-courier-beheer button,
+.knoppen-courier-beheer a {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Verschillende knoppen */
+.knoppen-courier-beheer .edit {
+    background: #dc2626
+}
+.knoppen-courier-beheer .edit:hover {
+    background: #b91c1c;
+}
+
+.knoppen-courier-beheer .delete {
+    background: #dc2626;
+}
+.knoppen-courier-beheer .delete:hover {
+    background: #b91c1c;
+}
+
+.knoppen-courier-beheer .activate {
+    background: #16a34a;
+}
+.knoppen-courier-beheer .activate:hover {
+    background: #15803d;
+}
+
+.login-pagina {
+    background-color: #4A70A9;
+    min-height: 94.1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.login-container {
+    max-width: 450px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    justify-content: flex-start;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 450px;
+    background: #EFECE3;
+    padding: 45px;
+    border-radius: 12px;
+    box-shadow: 0 8px 10px rgba(0,0,0,0.15);
+    animation: loginBounce 0.6s ease-out;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.login-button {
+    width: 100%;
+    background: #8FABD4;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.login-button:hover {
+    background: #4A70A9;
+    color: white;
+}
+
+.login-register-text {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #34495e;
+    font-size: 1.8rem;
+}
+
+.login-button {
+    width: 100%;
+    background: #8FABD4;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.login-button:hover {
+    background: #4A70A9;
+    color: white;
+}
+
+.login-register-text {
+    text-align: center;
+    margin-top: 15px;
+    color: black;
+}
+
+.navbar {
+    background: rgba(74, 158, 169, 0.62);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.nav-logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.alert {
+    position: fixed;
+    left: 52%;
+    top: 100px;
+    transform: translateX(-50%);
+    padding: 1.25em 2em;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    z-index: 9999;
+    min-width: 450px;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.alert-danger {
+    background-color: #e74c3c;
+}
+
+.alert-success {
+    background-color: #2ecc71;
+}
+
+@keyframes loginBounce {
+    0% { transform: translateY(-40px); opacity: 0; }
+    60% { transform: translateY(10px); opacity: 1; }
+    100% { transform: translateY(0); }
+}
+
+/*---------------afkeuren pop up-------------------------------*/
+.decline-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.hidden {
+    display: none;
+}
+
+.decline-content {
+    background: #fff;
+    padding: 22px;
+    width: 420px;
+    border-radius: 10px;
+}
+
+.decline-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.decline-confirm {
+    background: #d93636;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.decline-cancel {
+    background: #777;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.status-pending {
+    background: #ffecc4;
+    color: #b87500;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #4A70A9; /* Achtergrond */
+    min-height: 100vh;
+}
+
+/* Bovenbalk (titel) */
+.topbar {
+    padding: 16px 32px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.topbar-title {
+    font-size: 20px;
+}
+
+/* Content */
+.content {
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+/* Panel met overzicht (zoals formulier-achtergrond) */
+.pakket-panel {
+    background-color: #EFECE3; /* Achtergrond formulier */
+    color: #000000;
+    padding: 32px;
+    border-radius: 8px;
+    max-width: 1100px;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.panel-header h1 {
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 22px;
+}
+
+/* Filter rechtsboven */
+.filter-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 14px;
+    gap: 4px;
+}
+
+.filter-wrapper label {
+    font-weight: bold;
+}
+
+.filter-wrapper select {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+thead {
+    border-bottom: 2px solid #cccccc;
+}
+
+th,
+td {
+    padding: 10px 8px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e0dbcf;
+}
+
+/* Actieknoppen */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #8FABD4; /* Button kleur */
+    color: #000000;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4A70A9; /* Hover: zelfde als achtergrond */
+    color: #ffffff;
+}
+
+/* Container pakketten overzicht */
+.pakketten-pagina {
+    max-width: 1100px;
+    margin: 140px auto 40px;
+    padding: 20px;
+    background-color: #EFECE3;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    color: #000;
+    font-family: Arial, sans-serif;
+}
+
+.pakketten-pagina h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+/* Filter dropdown */
+.status-filter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.status-filter label {
+    font-weight: bold;
+}
+
+.status-filter select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* Tabel pakketten */
+.pakketten-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.pakketten-table thead {
+    background-color: #8FABD4;
+    color: #fff;
+}
+
+.pakketten-table th,
+.pakketten-table td {
+    padding: 12px 10px;
+    text-align: left;
+}
+
+.pakketten-table tbody tr:nth-child(even) {
+    background-color: #e0dbcf;
+}
+
+.pakketten-table tbody tr:hover {
+    background-color: #d2dcea;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #000000;
+    display: inline-block;
+    text-transform: capitalize;
+}
+
+/* Status kleuren */
+.status-afgeleverd { background-color: #2ecc71; }
+.status-onderweg { background-color: #f1c40f; color: #000; }
+.status-geannuleerd { background-color: #e74c3c; }
+.status-nieuw { background-color: #3498db; }
+
+/* Actieknoppen */
+.btn-sm {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background-color: #8FABD4;
+    color: #000;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-sm:hover {
+    background-color: #4A70A9;
+    color: #fff;
+}
+
+/* Geen pakketten melding */
+.geen-pakketten {
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+    color: #555;
+}
+
+.pakketten-table tr {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+.pakketten-table td {
+    padding: 8px 0;
+}
+.pakketten-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.bekijk-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #8FABD4;
+    color:  #000000;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 6px;
+}
+
+.bekijk-btn:hover {
+    background: #2980b9;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ===== MODAL ===== */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 420px;
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* ===== BUTTONS ===== */
+.modal-close {
+    background: #7f8c8d;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: #636e72;
+}
+
+.confirm-btn {
+    background: #f1c40f;
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.confirm-btn:hover {
+    background: #d4ac0d;
+}
+
+.confirm-btn.danger {
+
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-box {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    width: 320px;
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ================= COURIER OVERZICHT ================= */
+
+.courier-table-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+}
+
+.courier-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #EFECE3;
+    font-size: 14px;
+}
+
+.courier-table thead {
+    background: #8FABD4;
+    color: #fff;
+}
+
+.courier-table th,
+.courier-table td {
+    padding: 12px 14px;
+    text-align: left;
+}
+
+.courier-table tbody tr:nth-child(even) {
+    background: #e0dbcf;
+}
+
+.courier-table tbody tr:hover {
+    background: #d2dcea;
+}
+
+/* Claim knop */
+.courier-table .claim-btn {
+    background: #16a34a;
+    color: #fff;
+}
+
+.courier-table .claim-btn:hover {
+    background: #15803d;
+}
+
+/* ===== EINDE CODE 2 ===== */
+
+/* =========================
+   Mijn pakketten (klant)
+   ========================= */
+
+.mijn-pakketten {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.mijn-pakketten__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.mijn-pakketten__title {
+    font-size: 28px;
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* Table wrapper for small screens */
+.mijn-pakketten__table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.10);
+    background: #fff;
+}
+
+/* Table */
+.mijn-pakketten__table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 780px; /* zodat kolommen netjes blijven */
+}
+
+.mijn-pakketten__thead {
+    background: rgba(0,0,0,0.04);
+}
+
+.mijn-pakketten__th,
+.mijn-pakketten__td {
+    padding: 14px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.mijn-pakketten__th {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.mijn-pakketten__th--actions,
+.mijn-pakketten__td--actions {
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* Row hover */
+.mijn-pakketten__tbody .mijn-pakketten__tr:hover {
+    background: rgba(0,0,0,0.02);
+}
+
+/* Tracking number style */
+.mijn-pakketten__td--tt {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    letter-spacing: 0.3px;
+}
+
+/* Status pill */
+.mijn-pakketten__status-pill {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.06);
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+/* Empty state */
+.mijn-pakketten__td--empty {
+    text-align: center;
+    padding: 18px;
+    color: rgba(0,0,0,0.65);
+}
+
+/* Button */
+.mijn-pakketten__btn {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid rgba(0,0,0,0.18);
+    background: #fff;
+    color: inherit;
+    transition: transform 0.05s ease, background 0.15s ease;
+}
+
+.mijn-pakketten__btn:hover {
+    background: rgba(0,0,0,0.04);
+}
+
+.mijn-pakketten__btn:active {
+    transform: translateY(1px);
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+    .mijn-pakketten__title {
+        font-size: 22px;
+    }
+}
+
+
+/* =========================
+   Pakket details pagina
+   ========================= */
+
+.pakket-details {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 24px 28px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.pakket-details__title {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+    padding-bottom: 10px;
+}
+
+.pakket-details__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pakket-details__item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.pakket-details__item strong {
+    color: #333;
+    font-weight: 600;
+    min-width: 160px;
+}
+
+.pakket-details__item:last-child {
+    border-bottom: none;
+}
+
+/* Terug knop */
+.pakket-details__back {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: #f4f4f4;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.pakket-details__back:hover {
+    background: #e6e6e6;
+}
+
+/* Mobiel */
+@media (max-width: 600px) {
+    .pakket-details {
+        margin: 20px 12px;
+        padding: 20px;
+    }
+
+    .pakket-details__item {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .pakket-details__item strong {
+        min-width: auto;
+    }
+}
+
+.alert{
+    max-width: 920px;
+    margin: 16px auto 0;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.15);
+    background: rgba(255,255,255,0.9);
+}
+
+.alert.success{
+    background: green;
+    border-color: rgba(16,185,129,0.4);
+}
+
+.alert.error{
+    background: darkred;
+    border-color: rgba(239,68,68,0.4);
+}
+
+/* Page wrapper */
+.pakket-aanmelden-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px 56px;
+}
+
+/* Card */
+.pakket-aanmelden-card{
+    width: 100%;
+    max-width: 920px;
+    background: #EFECE3;
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Headings */
+.pakket-aanmelden-titel{
+    margin: 0;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.pakket-aanmelden-subtitel{
+    margin: 10px 0 18px;
+    color: rgba(15,23,42,0.75);
+    max-width: 70ch;
+}
+
+/* Form */
+.pakket-form{
+    display: grid;
+    gap: 16px;
+}
+
+/* Fieldset */
+.pakket-fieldset{
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 14px;
+    padding: 14px;
+    background: rgba(255,255,255,0.4);
+}
+
+.pakket-fieldset legend{
+    padding: 0 8px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* Helpers */
+.form-help{
+    margin: 6px 0 12px;
+    font-size: 13px;
+    color: rgba(15,23,42,0.7);
+}
+
+/* Grids */
+.grid-afmetingen{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.grid-adres{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.grid-datums{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* Form groups */
+.form-group{
+    display: grid;
+    gap: 6px;
+}
+
+.form-group-half{
+    max-width: 300px;
+}
+
+label{
+    font-size: 13px;
+    font-weight: 600;
+}
+
+input,
+textarea{
+    width: 100%;
+    padding: 11px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.25);
+    font-size: 14px;
+    background: rgba(255,255,255,0.9);
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+textarea{
+    resize: vertical;
+    min-height: 90px;
+}
+
+input:focus,
+textarea:focus{
+    border-color: #4A70A9;
+    box-shadow: 0 0 0 4px rgba(74,112,169,0.25);
+}
+
+input:disabled{
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Checkbox */
+.checkbox-inline{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border: 1px dashed rgba(0,0,0,0.3);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.4);
+}
+
+.checkbox-inline input{
+    width: 18px;
+    height: 18px;
+}
+
+/* Datum info */
+.datum-help{
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(15,23,42,0.7);
+}
+
+/* Button */
+.kosten-en-knop{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 8px;
+}
+
+.btn-primary{
+    background: #8FABD4;
+    color: #0f172a;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s ease, transform .05s ease;
+}
+
+.btn-primary:hover{
+    background: #4A70A9;
+    color: #fff;
+}
+
+.btn-primary:active{
+    transform: scale(0.98);
+}
+.track-trace-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+}
+
+.track-trace-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.track-trace-container form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.track-trace-container input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.track-trace-container button {
+    padding: 8px 14px;
+    background: #0d6efd;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.track-trace-container button:hover {
+    background: #0b5ed7;
+}
+
+.track-trace-container h3 {
+    margin-bottom: 10px;
+}
+
+.track-trace-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.track-trace-container li {
+    padding: 8px;
+    border-left: 4px solid #0d6efd;
+    background: #f8f9fa;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.track-trace-error {
+    color: #dc3545;
+    margin-top: 10px;
+}
+
+.progress-circles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin: 20px 0 40px 0;
+}
+
+.progress-circles::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12.5px;
+    right: 12.5px;
+    height: 3px;
+    background: #ccc;
+    z-index: 1;
+    border-radius: 2px;
+}
+
+.progress-filled {
+    position: absolute;
+    top: 12px;
+    left: 12.5px;
+    height: 3px;
+    background: #0d6efd;
+    z-index: 2;
+    border-radius: 2px;
+}
+
+.circle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+}
+
+.circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #0d6efd;
+    background: #fff;
+}
+
+.circle.filled {
+    background: #0d6efd;
+}
+
+
+.circle-label {
+    margin-top: 8px;
+    font-size: 12px;
+    text-align: center;
+    width: 60px;
+}

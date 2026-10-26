@@ -1,0 +1,793 @@
+/* ------- algemene styling ------- */
+body{
+    background-color: #f4f4f4;
+}
+
+.content {
+    width: 1000px;
+    position: relative;
+    margin: auto;
+    top: 50px;
+    font-family: Arial, sans-serif;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.body-home {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FAFAFA;
+    color: #004A7C;
+}
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #fff;
+}
+
+.header {
+    background-color: #E8F1F5;
+    padding: 20px 0;
+    border-bottom: 2px solid #005691;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: #005691;
+}
+
+/* ------- navbar styling ------- */
+/*.navbar {*/
+/*    background-color: #6c757d;*/
+/*}*/
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: fit-content;
+    /*width: 1100px;*/
+}
+
+.navbar li {
+    margin-left: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+
+}
+
+.navbar a {
+    color: #004A7C;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.navbar img {
+    width: 45px;
+}
+
+.navbar a:hover {
+    color: #005691;
+    border-bottom: 2px solid #004A7C;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    /*border-radius: 5px;*/
+}
+
+/*.nav-item:hover {*/
+/*    background-color: #334155;*/
+/*}*/
+
+.active {
+    background-color: #2563EB;
+}
+
+/* Icons styling */
+.nav-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.icon {
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+}
+
+/* ------- Dropdown styling ------- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    /*background-color: #005691;*/
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #004A7C;
+    color: #FAFAFA;
+    /*padding: 10px 0;*/
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 200px;
+}
+
+.dropdown-menu li {
+    /*padding: 5px 5px;*/
+    text-align: left;
+}
+
+.dropdown-menu li a {
+    color: #FAFAFA;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #005691;
+    /*background: 200px;*/
+    border-radius: 5px;
+    color: #fff;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ------- homepagina styling ------- */
+.hero {
+    position: relative;
+    background-color: #005691;
+    height: 400px;
+    color: #FAFAFA;
+    text-align: center;
+}
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content h2 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    background-color: #E8F1F5;
+    color: #004A7C;
+    padding: 15px 40px;
+    text-transform: uppercase;
+    font-size: 18px;
+    border: 2px solid #004A7C;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #004A7C;
+    color: #FAFAFA;
+}
+
+.about {
+    padding: 60px 0;
+    background-color: #E8F1F5;
+    text-align: center;
+}
+
+.about-grid {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.about-card {
+    background: #FAFAFA;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+.about-card h3 {
+    color: #004A7C;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.featured-builds {
+    padding: 60px 0;
+}
+
+.featured-builds h2 {
+    text-align: center;
+    color: #005691;
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.builds-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.build-card {
+    background-color: #FAFAFA;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 20px;
+}
+
+.build-card h3 {
+    font-size: 24px;
+    color: #004A7C;
+}
+
+.details-button {
+    background-color: #004A7C;
+    color: #FAFAFA;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.details-button:hover {
+    background-color: #005691;
+}
+
+.footer {
+    background-color: #E8F1F5;
+    padding: 20px 0;
+    text-align: center;
+    color: #004A7C;
+}
+footer a {
+    color: #004A7C;
+}
+
+/* ---------- rest styling ---------- */
+
+/* inlog Form Styling */
+.inlog-form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin: 100px auto; / Centers form vertically /
+display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inlog-form h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.inlog-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+    width: 100%;
+    text-align: left;
+}
+
+.inlog-form input[type="text"],
+.inlog-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.inlog-form input[type="submit"] {
+    width: 100%;
+    background-color: #004A7C;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.inlog-form input[type="submit"]:hover {
+    background-color: #005691;
+}
+
+.registratie-container{
+    width: 100%;
+    max-width: 500px;
+    margin: 100px auto;
+    background-color: #ffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.registratie-header{
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #102A42;
+    font-family: 'Poppins', sans-serif;
+}
+
+.registratie-container{
+    width: 100%;
+    max-width: 500px;
+    margin: 100px auto;
+    background-color: #ffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.registratie-header{
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #102A42;
+    font-family: 'Poppins', sans-serif;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: 18px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.registreer-button{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #005691;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.registreer-button:hover{
+    background-color: darkblue;
+}
+
+/* Register Link Styles */
+.register-link, .login-link {
+    text-align: center;
+    color: #666;
+    padding-top: 20px;
+    font-size: 17px;
+}
+
+.register-link a, .login-link a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.register-link a:hover, .login-link a:hover {
+    color: #0056b3;
+}
+
+
+/* Producten overzicht styling */
+
+.overzicht-container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for the container */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.celestial-row:hover {
+    background-color: #e9ecef; /* Light hover effect on rows */
+}
+
+.overzicht-header{
+    text-align: center;
+    color: #6c757d; /* Dark grey color for the header */
+    font-size: 2em; /* Larger header font size */
+    margin-bottom: 20px; /* Space below the header */
+}
+
+.producten-table{
+    width: 100%;
+    border-collapse: collapse; /* Merge borders */
+}
+
+.producten-header{
+    background-color: #343a40; /* Dark background for the header */
+    color: #ffffff; /* White text for headers */
+    padding: 12px; /* Padding for header cells */
+}
+
+.producten-data{
+    background-color: #f1f3f5; /* Light grey background for data rows */
+
+    padding: 12px; /* Padding for data cells */
+}
+
+.producten-row:hover{
+    background-color: #e9ecef; /* Light hover effect on rows */
+}
+
+.toevoeg-button{
+    width: 150px;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto;
+
+}
+
+button:hover{
+    background-color: #0056b3;
+}
+
+.delete-button{
+    width: 150px;
+    padding: 10px;
+    border: none;
+    background-color: #fb0505;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto;
+
+}
+
+.delete-button:hover{
+    background-color: #5c040e;
+}
+
+.bewerken-button{
+    width: 150px;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+/* Producten Toevoegen styling */
+
+.toevoegen-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: auto;
+    margin-top: 100px;
+    position: relative;
+    width: 600px;
+    height: fit-content;
+    text-align: center;
+    align-content: center;
+    font-family: Arial, sans-serif;
+}
+
+.toevoegen-container h1 {
+    margin-bottom: 20px;
+    color: #112731;
+}
+
+.toevoegen-container label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.toevoegen-container input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/*-----Producten-aanpassen styling-----*/
+.aanpassen-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: auto;
+    margin-top: 100px;
+    position: relative;
+    width: 600px;
+    height: fit-content;
+    text-align: center;
+    align-content: center;
+    font-family: Arial, sans-serif;
+}
+.aanpassen-container button {
+    width: 100px;
+    padding: 8px;
+    background-color: #112731;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.aanpassen-container button:hover {
+    background-color: #0e1f2b;
+}
+
+.aanpassen-container h1 {
+    margin-bottom: 20px;
+    color: #112731;
+}
+
+.aanpassen-container label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.aanpassen-container input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.non-actief {
+    color: red;
+}
+
+/* Register Link Styles */
+.register-link, .login-link {
+    text-align: center;
+    color: #666;
+    padding-top: 20px;
+    font-size: 17px;
+}
+
+.register-link a, .login-link a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.register-link a:hover, .login-link a:hover {
+    color: #0056b3;
+}
+/* Prijsverschil */
+.price-difference {
+    color: green;
+    font-weight: bold;
+}
+/* Winkelmand Styling */
+.winkelmand-product-overview {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.winkelmand-product-overview .form-box {
+    padding: 30px;
+    background-color: #FAFAFA;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.winkelmand-product-overview h2 {
+    font-size: 36px;
+    color: #004A7C;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.styled-table th {
+    background-color: #E8F1F5;
+    color: #004A7C;
+    font-size: 16px;
+}
+
+.styled-table td {
+    font-size: 14px;
+    color: #333;
+}
+
+.price {
+    font-weight: bold;
+    color: #004A7C;
+}
+
+.quantity-container {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.quantity-input {
+    width: 50px;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.winkelmand-delete-button {
+    background-color: #FF6347;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.winkelmand-delete-button:hover {
+    background-color: #d54a31;
+}
+
+.total-amount {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    color: #004A7C;
+    margin-bottom: 30px;
+}
+
+.order-button {
+    text-align: center;
+}
+
+.place-order-button {
+    background-color: #2563EB;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+.place-order-button:hover {
+    background-color: #005691;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .winkelmand-product-overview .form-box {
+        padding: 20px;
+    }
+
+    .styled-table th, .styled-table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .quantity-container {
+        justify-content: flex-start;
+    }
+
+    .quantity-input {
+        width: 40px;
+    }
+
+    .total-amount {
+        font-size: 18px;
+    }
+
+    .place-order-button {
+        width: 100%;
+        padding: 12px;
+    }
+}

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}
+Map
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="map-page">
+    <div class="map-header">
+        <h1>Map Page</h1>
+    </div>
+
+    <div class="map-layout">
+
+        <section class="map-card">
+            <div class="google-map-wrapper">
+                {% if map_data.gps_available and map_data.google_maps_embed_url %}
+                    <iframe
+                        class="google-map-frame"
+                        src="{{ map_data.google_maps_embed_url }}"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+
+                    <div class="google-map-marker-label">
+                        Marker gedetecteerde locatie
+                    </div>
+                {% else %}
+                    <div class="no-map-placeholder">
+                        <h2>Geen GPS beschikbaar</h2>
+                        <p>{{ map_data.message }}</p>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="map-legend">
+                <span class="legend-box"></span>
+                <span>Marker gedetecteerde locatie</span>
+            </div>
+        </section>
+
+        <aside class="location-card">
+            <div class="location-header">
+                <h2>Location Details</h2>
+            </div>
+
+            <div class="location-details">
+                <div class="location-row">
+                    <span>GPS Status:</span>
+                    <strong>
+                        {% if map_data.gps_available %}
+                            Beschikbaar
+                        {% else %}
+                            Niet beschikbaar
+                        {% endif %}
+                    </strong>
+                </div>
+
+                <div class="location-row">
+                    <span>Latitude:</span>
+                    <strong>{{ map_data.latitude or "--" }}</strong>
+                </div>
+
+                <div class="location-row">
+                    <span>Longitude:</span>
+                    <strong>{{ map_data.longitude or "--" }}</strong>
+                </div>
+
+                <div class="location-row">
+                    <span>Altitude:</span>
+                    <strong>
+                        {% if map_data.altitude %}
+                            {{ map_data.altitude }} m
+                        {% else %}
+                            --
+                        {% endif %}
+                    </strong>
+                </div>
+            </div>
+
+            <div class="location-message">
+                {% if map_data.gps_available %}
+                    GPS locatie beschikbaar voor deze afbeelding.
+                {% else %}
+                    {{ map_data.message }}
+                {% endif %}
+            </div>
+
+            {% if map_data.google_maps_url %}
+                <a href="{{ map_data.google_maps_url }}" target="_blank" class="back-analysis-button">
+                    Open in Google Maps
+                </a>
+            {% endif %}
+
+            <a href="{{ url_for('analyse_detail', analyse_id=analyse_id) }}" class="back-analysis-button">
+                Terug naar analyse
+            </a>
+        </aside>
+
+    </div>
+</div>
+{% endblock %}

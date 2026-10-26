@@ -1,0 +1,15 @@
+<nav class="navbar">
+    <div class="menu-links">
+<!--        <div class="geotrace-logo"></div>-->
+<!--        <a class="menu" href="{{ url_for('admin_dashboard') }}">Dashboard</a>-->
+        <a class="menu" href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a class="menu" href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+        <a class="menu" href="{{ url_for('admin_gebruikers') }}">Gebruikers</a>
+        <a class="menu" href="{{ url_for('login') }}">Tijdlijn</a>
+    </div>
+
+    <div class="menu-rechts">
+        <a class="menu" href="{{ url_for('profiel') }}">Profiel</a>
+        <a class="menu" href="{{ url_for('logout') }}">Uitloggen</a>
+    </div>
+</nav>

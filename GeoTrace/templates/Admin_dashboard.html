@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<p>
+  Welkom {{ session["voornaam"] }}
+  {% if session["tussenvoegsel"] %}
+    {{ session["tussenvoegsel"] }}
+  {% endif %}
+  {{ session["achternaam"] }}
+</p>
+
+{% endblock %}

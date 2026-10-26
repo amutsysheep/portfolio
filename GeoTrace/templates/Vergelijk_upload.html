@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+Afbeeldingen vergelijken
+{% endblock %}
+
+{% block content %}
+<div class="upload-page">
+
+    <div class="upload-card">
+
+        <div class="upload-header">
+            <span>GEOTRACE VERGELIJKING</span>
+            <h1>Afbeeldingen vergelijken</h1>
+            <p>Upload twee afbeeldingen om objecten, tekst, metadata en zichtbare verschillen te analyseren.</p>
+        </div>
+
+        {% if error %}
+            <div class="upload-error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data" class="compare-upload-form">
+
+            <div class="compare-upload-grid">
+
+                <label class="upload-dropzone compare-dropzone" for="image_1">
+                    <input type="file" id="image_1" name="image_1" accept=".jpg,.jpeg,.png" hidden>
+
+                    <div class="upload-plus">+</div>
+                    <h2>Afbeelding A</h2>
+                    <p>Sleep je eerste afbeelding hierheen of klik om te selecteren</p>
+                    <span id="image1Name">Alleen JPG, JPEG en PNG bestanden zijn toegestaan</span>
+                </label>
+
+                <label class="upload-dropzone compare-dropzone" for="image_2">
+                    <input type="file" id="image_2" name="image_2" accept=".jpg,.jpeg,.png" hidden>
+
+                    <div class="upload-plus">+</div>
+                    <h2>Afbeelding B</h2>
+                    <p>Sleep je tweede afbeelding hierheen of klik om te selecteren</p>
+                    <span id="image2Name">Alleen JPG, JPEG en PNG bestanden zijn toegestaan</span>
+                </label>
+
+            </div>
+
+            <div class="upload-actions">
+                <a href="{{ url_for('analyse') }}" class="upload-cancel-button">Annuleren</a>
+                <button type="submit" class="upload-submit-button">Vergelijking starten</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+const image1Input = document.getElementById("image_1");
+const image2Input = document.getElementById("image_2");
+const image1Name = document.getElementById("image1Name");
+const image2Name = document.getElementById("image2Name");
+
+image1Input.addEventListener("change", () => {
+    if (image1Input.files.length > 0) {
+        image1Name.textContent = image1Input.files[0].name;
+    }
+});
+
+image2Input.addEventListener("change", () => {
+    if (image2Input.files.length > 0) {
+        image2Name.textContent = image2Input.files[0].name;
+    }
+});
+</script>
+{% endblock %}

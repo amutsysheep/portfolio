@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+Wachtwoord wijzigen
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="password-page">
+    <div class="password-card">
+
+        <div class="password-header">
+            <div class="password-icon">
+                <span>🔐</span>
+            </div>
+
+            <div>
+                <h1 class="password-title">Wachtwoord wijzigen</h1>
+                <p class="password-subtitle">Kies een nieuw veilig wachtwoord voor je account.</p>
+            </div>
+        </div>
+
+        <form method="post" class="password-form">
+
+            <div class="password-form-group">
+                <label for="current_password">Huidig wachtwoord</label>
+                <input 
+                    type="password" 
+                    id="current_password" 
+                    name="current_password" 
+                    placeholder="Voer je huidige wachtwoord in"
+                    required
+                >
+            </div>
+
+            <div class="password-form-group">
+                <label for="new_password">Nieuw wachtwoord</label>
+                <input 
+                    type="password" 
+                    id="new_password" 
+                    name="new_password" 
+                    placeholder="Voer je nieuwe wachtwoord in"
+                    required
+                >
+            </div>
+
+            <div class="password-form-group">
+                <label for="confirm_password">Bevestig nieuw wachtwoord</label>
+                <input 
+                    type="password" 
+                    id="confirm_password" 
+                    name="confirm_password" 
+                    placeholder="Herhaal je nieuwe wachtwoord"
+                    required
+                >
+            </div>
+
+<div class="password-rules">
+    <p id="rule-length" class="password-rule">Minimaal 16 tekens lang</p>
+    <p id="rule-uppercase" class="password-rule">Minimaal 1 hoofdletter</p>
+    <p id="rule-lowercase" class="password-rule">Minimaal 1 kleine letter</p>
+    <p id="rule-number" class="password-rule">Minimaal 1 cijfer</p>
+    <p id="rule-special" class="password-rule">Minimaal 1 speciaal teken</p>
+    <p id="rule-different" class="password-rule">Niet hetzelfde als je huidige wachtwoord</p>
+</div>
+
+            <button type="submit" class="password-button">
+                Wachtwoord opslaan
+            </button>
+
+            <a href="{{ url_for('profiel') }}" class="password-back-link">
+                Terug naar profiel
+            </a>
+
+        </form>
+
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/wachtwoord_wijzigen.js') }}"></script>
+{% endblock %}

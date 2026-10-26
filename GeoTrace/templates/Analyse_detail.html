@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block title %}
+Analyse detail
+{% endblock %}
+
+{% block content %}
+{% set display = result.display_data %}
+
+<div class="analysis-detail-page">
+
+    <div class="analysis-detail-card">
+
+        <div class="analysis-detail-header">
+            <div>
+                <h1>{{ display.page_title }}</h1>
+                <p>{{ display.subtitle }}</p>
+            </div>
+
+            <a href="{{ url_for('analyse') }}" class="analysis-back-button">Terug</a>
+        </div>
+
+        <div class="analysis-detail-grid">
+
+            <div class="left-column">
+
+                <section class="analysis-panel image-panel">
+                    <div class="panel-header">
+                        <h2>Image preview</h2>
+                    </div>
+
+                    <div class="image-preview-box">
+                        {% if display.image_preview.available %}
+                            <img
+                                src="{{ display.image_preview.url }}"
+                                alt="{{ display.image_preview.filename }}"
+                            >
+                        {% else %}
+                            <div class="empty-state">
+                                Geen afbeelding beschikbaar
+                            </div>
+                        {% endif %}
+                    </div>
+                </section>
+
+                <section class="analysis-panel">
+                    <div class="panel-header">
+                        <a href="{{ url_for('analyse_ocr', analyse_id=analyse_id) }}" class="map-title-link">
+                            <h2>{{ display.ocr_box.title }}</h2>
+                        </a>
+                    </div>
+
+                    {% if display.ocr_box.text_found %}
+                        <div class="ocr-box">
+                            {{ display.ocr_box.display_text }}
+                        </div>
+                    {% else %}
+                        <div class="empty-state small">
+                            Geen betrouwbare OCR tekst gevonden
+                        </div>
+                    {% endif %}
+                </section>
+
+                <section class="analysis-panel">
+                    <div class="panel-header">
+                        <h2>{{ display.objects_box.title }}</h2>
+                    </div>
+
+                    {% if display.objects_box.objects_found %}
+                        <div class="objects-list">
+                            {% for object in display.objects_box.details %}
+                                <div class="object-item">
+                                    <strong>{{ object.name.replace("_", " ").title() }}</strong>
+
+                                    {% if object.evidence %}
+                                        <p>{{ object.evidence }}</p>
+                                    {% endif %}
+
+                                    {% if object.confidence %}
+                                        <span class="object-confidence">
+                                            Zekerheid: {{ object.confidence }}
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state small">
+                            Geen objecten gevonden
+                        </div>
+                    {% endif %}
+                </section>
+
+            </div>
+
+            <div class="right-column">
+
+                <section class="analysis-panel">
+                    <div class="panel-header">
+                        <a href="{{ url_for('analyse_metadata', analyse_id=analyse_id) }}" class="metadata-link">
+                            <h2>Metadata</h2>
+                        </a>
+                    </div>
+
+                    <div class="metadata-grid">
+                        {% if display.metadata_cards %}
+                            {% for card in display.metadata_cards %}
+                                <div class="metadata-item">
+                                    <span>{{ card.label }}</span>
+                                    <strong>{{ card.value }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="empty-state small">
+                                Geen metadata gevonden
+                            </div>
+                        {% endif %}
+                    </div>
+                </section>
+
+                <section class="analysis-panel">
+                    <div class="panel-header">
+                        <a href="{{ url_for('analyse_map', analyse_id=analyse_id) }}" class="map-title-link">
+                            <h2>{{ display.map_box.title }}</h2>
+                        </a>
+                    </div>
+
+                    {% if display.map_box.gps_available %}
+                        <div class="map-box">
+                            <iframe
+                                src="{{ display.map_box.google_maps_embed_url }}"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+
+                        <div class="map-coordinates">
+                            <span>Latitude: {{ display.map_box.latitude }}</span>
+                            <span>Longitude: {{ display.map_box.longitude }}</span>
+
+                            {% if display.map_box.altitude %}
+                                <span>Altitude: {{ display.map_box.altitude }}</span>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state small">
+                            {{ display.map_box.message }}
+                        </div>
+                    {% endif %}
+                </section>
+
+                <section class="analysis-panel">
+                    <div class="panel-header">
+                        <h2>Locatie-aanwijzingen</h2>
+                    </div>
+
+                    {% if display.location_details.location_clues_found %}
+                        <div class="objects-list">
+                            {% for clue in display.location_details.details %}
+                                <div class="object-item">
+                                    <strong>{{ clue.name.replace("_", " ").title() }}</strong>
+
+                                    {% if clue.evidence %}
+                                        <p>{{ clue.evidence }}</p>
+                                    {% endif %}
+
+                                    {% if clue.confidence %}
+                                        <span class="object-confidence">
+                                            Zekerheid: {{ clue.confidence }}
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state small">
+                            Geen zichtbare locatie-aanwijzingen gevonden
+                        </div>
+                    {% endif %}
+                </section>
+
+                <section class="analysis-panel">
+                    <div class="panel-header">
+                        <h2>Scene context</h2>
+                    </div>
+
+                    {% if display.scene_details.categories %}
+                        <div class="objects-list">
+                            {% for scene in display.scene_details.details %}
+                                <div class="object-item">
+                                    <strong>{{ scene.name.replace("_", " ").title() }}</strong>
+
+                                    {% if scene.evidence %}
+                                        <p>{{ scene.evidence }}</p>
+                                    {% endif %}
+
+                                    {% if scene.confidence %}
+                                        <span class="object-confidence">
+                                            Zekerheid: {{ scene.confidence }}
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state small">
+                            Geen scene context gevonden
+                        </div>
+                    {% endif %}
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

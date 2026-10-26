@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Email bewerken{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gebruikers.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="email-edit-page">
+  <div class="email-edit-container">
+    <div class="email-edit-header">
+      <h1>Email bewerken</h1>
+      <p>Wijzig het emailadres van dit account.</p>
+    </div>
+
+    <section class="email-edit-card">
+      <div class="email-edit-card-header">
+        <h2>Accountgegevens</h2>
+        <p>Login ID: {{ account["Login_ID"] }} • Rol: {{ account["Rol"] }}</p>
+      </div>
+
+      <form method="post" class="email-edit-form">
+        <div class="email-edit-form-group">
+          <label for="email">Nieuw emailadres</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value="{{ account['Email'] }}"
+            required
+          >
+        </div>
+
+        <button type="submit" class="email-edit-button">Email opslaan</button>
+
+        <a href="{{ url_for('admin_gebruikers') }}" class="email-edit-back-link">
+          Terug naar gebruikersbeheer
+        </a>
+      </form>
+    </section>
+  </div>
+</div>
+{% endblock %}

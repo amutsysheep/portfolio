@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Verificatie{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-logo">
+      <span>G</span>
+    </div>
+
+    <h1 class="login-title">Verificatie</h1>
+    <p class="login-subtitle">
+      We hebben een verificatiecode naar je email gestuurd.
+    </p>
+
+    <form method="post" class="login-form">
+      <div class="form-group">
+        <label for="code">Verificatiecode</label>
+        <input
+          type="text"
+          name="code"
+          id="code"
+          placeholder="Voer je 6-cijferige code in"
+          maxlength="6"
+          required
+        >
+      </div>
+
+      <button type="submit" class="login-button">Code controleren</button>
+    </form>
+
+    <div class="login-footer">
+      <div class="status-row">
+        <span class="status-dot"></span>
+        <span>2FA beveiliging actief</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

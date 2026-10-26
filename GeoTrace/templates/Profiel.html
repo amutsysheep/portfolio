@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+Profiel
+{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+    <div class="profile-card">
+
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <span>{{ naam[0] }}</span>
+            </div>
+
+            <div>
+                <h1 class="profile-title">Mijn profiel</h1>
+                <p class="profile-subtitle">Bekijk je accountgegevens</p>
+            </div>
+        </div>
+
+        <div class="profile-info">
+
+            <div class="profile-row">
+                <div class="profile-label">Naam</div>
+                <div class="profile-value">{{ naam }}</div>
+            </div>
+
+            <div class="profile-row">
+                <div class="profile-label">Email</div>
+                <div class="profile-value">{{ email }}</div>
+            </div>
+
+            <div class="profile-row">
+                <div class="profile-label">Rol</div>
+                <div class="profile-value role-badge">{{ rol }}</div>
+            </div>
+
+        </div>
+
+        <div class="profile-actions">
+            <a href="{{ url_for('wachtwoord_wijzigen') }}" class="profile-button">
+                Wachtwoord wijzigen
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% block title %}
+Vergelijking uitvoeren
+{% endblock %}
+
+{% block content %}
+<div class="analysis-loading-page">
+
+    <div class="analysis-loading-card">
+
+        <div class="loading-top-label">
+            GEOTRACE COMPARISON
+        </div>
+
+        <h1>Afbeeldingen worden vergeleken</h1>
+
+        <p class="loading-subtitle">
+            De twee afbeeldingen worden gecontroleerd op metadata, tekst, objecten,
+            locatiegegevens en zichtbare verschillen.
+        </p>
+
+        <div class="loading-progress-header">
+            <span id="loadingStepText">Afbeelding A uitlezen...</span>
+            <strong id="loadingPercentage">15%</strong>
+        </div>
+
+        <div class="loading-progress-bar">
+            <div class="loading-progress-fill" id="loadingProgressFill"></div>
+        </div>
+
+        <div class="loading-task-list">
+
+            <div class="loading-task active" id="step1">
+                <div class="loading-task-icon">
+                    <span></span>
+                </div>
+
+                <div class="loading-task-content">
+                    <h2>Afbeelding A analyseren</h2>
+                    <p>Metadata, OCR tekst, objecten en locatiegegevens worden verzameld.</p>
+                </div>
+
+                <div class="loading-task-status">
+                    Bezig
+                </div>
+            </div>
+
+            <div class="loading-task" id="step2">
+                <div class="loading-task-icon">
+                    <span></span>
+                </div>
+
+                <div class="loading-task-content">
+                    <h2>Afbeelding B analyseren</h2>
+                    <p>De tweede afbeelding wordt op dezelfde onderdelen onderzocht.</p>
+                </div>
+
+                <div class="loading-task-status">
+                    Wacht
+                </div>
+            </div>
+
+            <div class="loading-task" id="step3">
+                <div class="loading-task-icon">
+                    <span></span>
+                </div>
+
+                <div class="loading-task-content">
+                    <h2>Verschillen berekenen</h2>
+                    <p>Pixelverschillen, objectverschillen en OCR verschillen worden vergeleken.</p>
+                </div>
+
+                <div class="loading-task-status">
+                    Wacht
+                </div>
+            </div>
+
+            <div class="loading-task" id="step4">
+                <div class="loading-task-icon">
+                    <span></span>
+                </div>
+
+                <div class="loading-task-content">
+                    <h2>Resultaat opbouwen</h2>
+                    <p>De vergelijkingspagina wordt klaargezet.</p>
+                </div>
+
+                <div class="loading-task-status">
+                    Wacht
+                </div>
+            </div>
+
+        </div>
+
+        <div class="loading-info-box" id="loadingInfoBox">
+            <span></span>
+            Afbeelding A wordt geanalyseerd.
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+let comparisonStarted = false;
+
+const steps = [
+    {
+        percentage: 15,
+        text: "Afbeelding A uitlezen...",
+        info: "Afbeelding A wordt geanalyseerd.",
+        activeStep: "step1"
+    },
+    {
+        percentage: 40,
+        text: "Afbeelding B uitlezen...",
+        info: "Afbeelding B wordt geanalyseerd.",
+        activeStep: "step2"
+    },
+    {
+        percentage: 70,
+        text: "Verschillen berekenen...",
+        info: "Objecten, OCR tekst en pixelverschillen worden vergeleken.",
+        activeStep: "step3"
+    },
+    {
+        percentage: 90,
+        text: "Resultaat voorbereiden...",
+        info: "De vergelijkingspagina wordt opgebouwd.",
+        activeStep: "step4"
+    }
+];
+
+let currentStepIndex = 0;
+
+function updateVisualProgress() {
+    const step = steps[currentStepIndex];
+
+    document.getElementById("loadingStepText").textContent = step.text;
+    document.getElementById("loadingPercentage").textContent = step.percentage + "%";
+    document.getElementById("loadingProgressFill").style.width = step.percentage + "%";
+    document.getElementById("loadingInfoBox").innerHTML = "<span></span>" + step.info;
+
+    document.querySelectorAll(".loading-task").forEach((task) => {
+        task.classList.remove("active");
+        task.classList.remove("done");
+
+        const status = task.querySelector(".loading-task-status");
+        status.textContent = "Wacht";
+    });
+
+    steps.forEach((item, index) => {
+        const task = document.getElementById(item.activeStep);
+        const status = task.querySelector(".loading-task-status");
+
+        if (index < currentStepIndex) {
+            task.classList.add("done");
+            status.textContent = "Klaar";
+        }
+
+        if (index === currentStepIndex) {
+            task.classList.add("active");
+            status.textContent = "Bezig";
+        }
+    });
+
+    if (currentStepIndex < steps.length - 1) {
+        currentStepIndex++;
+    }
+}
+
+setInterval(updateVisualProgress, 3500);
+updateVisualProgress();
+
+async function startComparison() {
+    if (comparisonStarted) {
+        return;
+    }
+
+    comparisonStarted = true;
+
+    try {
+        const response = await fetch("{{ url_for('vergelijk_start', comparison_id=comparison_id) }}", {
+            method: "POST"
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.redirect_url) {
+            document.getElementById("loadingPercentage").textContent = "100%";
+            document.getElementById("loadingProgressFill").style.width = "100%";
+            document.getElementById("loadingStepText").textContent = "Vergelijking voltooid";
+            window.location.href = data.redirect_url;
+            return;
+        }
+
+        if (data.running) {
+            return;
+        }
+
+        alert(data.error || "Vergelijking is mislukt.");
+    } catch (error) {
+        console.error(error);
+        alert("Er ging iets mis tijdens het vergelijken.");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", startComparison);
+</script>
+{% endblock %}

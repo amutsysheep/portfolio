@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-page">
+    <div class="dashboard-container">
+
+        <div class="dashboard-header">
+            <div>
+                <h1>Home Dashboard</h1>
+                <p>Overzicht van analyses, OCR-resultaten en recente uploads.</p>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card stat-purple">
+                <div class="stat-label">Total Analyses</div>
+                <div class="stat-value">{{ stats.total_analyses }}</div>
+                <div class="stat-bar"></div>
+            </div>
+
+            <div class="stat-card stat-blue">
+                <div class="stat-label">Images Processed</div>
+                <div class="stat-value">{{ stats.images_processed }}</div>
+                <div class="stat-bar"></div>
+            </div>
+
+            <div class="stat-card stat-cyan">
+                <div class="stat-label">OCR Results</div>
+                <div class="stat-value">{{ stats.ocr_results }}</div>
+                <div class="stat-bar"></div>
+            </div>
+
+            <div class="stat-card stat-light">
+                <div class="stat-label">Objects Detected</div>
+                <div class="stat-value">{{ stats.objects_detected }}</div>
+                <div class="stat-bar"></div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <section class="dashboard-panel">
+                <div class="panel-header">
+                    <h2>Analyse activiteit</h2>
+                    <p>Analyses per maand</p>
+                </div>
+                <div class="chart-box">
+                    <canvas id="analysesChart"></canvas>
+                </div>
+            </section>
+
+            <section class="dashboard-panel">
+                <div class="panel-header">
+                    <h2>Resultaten overzicht</h2>
+                    <p>OCR en object detectie</p>
+                </div>
+                <div class="chart-box">
+                    <canvas id="resultsChart"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <section class="dashboard-panel recent-panel">
+            <div class="panel-header">
+                <h2>Recent uploads</h2>
+                <p>Laatst geanalyseerde bestanden</p>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Date Uploaded</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if uploads %}
+                            {% for upload in uploads %}
+                            <tr>
+                                <td>{{ upload.filename }}</td>
+                                <td>{{ upload.date_uploaded }}</td>
+                                <td>
+                                    <span class="status-badge">{{ upload.status }}</span>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('upload') }}" class="table-action-button">Nieuwe analyse</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="4" class="empty-table">
+                                    Geen uploads beschikbaar
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const chartLabels = {{ chart_labels|tojson }};
+    const analysesData = {{ analyses_data|tojson }};
+    const ocrData = {{ ocr_data|tojson }};
+    const objectData = {{ object_data|tojson }};
+
+    const analysesCtx = document.getElementById('analysesChart').getContext('2d');
+    const analysesGradient = analysesCtx.createLinearGradient(0, 0, 0, 300);
+    analysesGradient.addColorStop(0, '#7852FF');
+    analysesGradient.addColorStop(0.33, '#105578');
+    analysesGradient.addColorStop(0.66, '#54ACBF');
+    analysesGradient.addColorStop(1, '#A7EBF2');
+
+    const analysesFill = analysesCtx.createLinearGradient(0, 0, 0, 300);
+    analysesFill.addColorStop(0, 'rgba(120, 82, 255, 0.35)');
+    analysesFill.addColorStop(0.5, 'rgba(84, 172, 191, 0.18)');
+    analysesFill.addColorStop(1, 'rgba(167, 235, 242, 0.03)');
+
+    new Chart(analysesCtx, {
+        type: 'line',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'Analyses',
+                data: analysesData,
+                borderColor: analysesGradient,
+                backgroundColor: analysesFill,
+                fill: true,
+                tension: 0.35,
+                borderWidth: 3,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointBackgroundColor: '#A7EBF2',
+                pointBorderColor: '#0f1424',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#dbe6ff'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#aeb8ca'
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.05)'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#aeb8ca'
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.05)'
+                    }
+                }
+            }
+        }
+    });
+
+    const resultsCtx = document.getElementById('resultsChart').getContext('2d');
+    const resultsGradient1 = resultsCtx.createLinearGradient(0, 0, 0, 300);
+    resultsGradient1.addColorStop(0, '#7852FF');
+    resultsGradient1.addColorStop(1, '#54ACBF');
+
+    const resultsGradient2 = resultsCtx.createLinearGradient(0, 0, 0, 300);
+    resultsGradient2.addColorStop(0, '#105578');
+    resultsGradient2.addColorStop(1, '#A7EBF2');
+
+    new Chart(resultsCtx, {
+        type: 'bar',
+        data: {
+            labels: chartLabels,
+            datasets: [
+                {
+                    label: 'OCR',
+                    data: ocrData,
+                    backgroundColor: resultsGradient1,
+                    borderRadius: 10
+                },
+                {
+                    label: 'Objects',
+                    data: objectData,
+                    backgroundColor: resultsGradient2,
+                    borderRadius: 10
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#dbe6ff'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#aeb8ca'
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.05)'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#aeb8ca'
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.05)'
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

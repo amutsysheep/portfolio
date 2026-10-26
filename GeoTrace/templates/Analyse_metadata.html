@@ -1,0 +1,48 @@
+{% extends "Base.html" %}
+
+{% block title %}
+Metadata
+{% endblock %}
+
+{% block content %}
+<div class="metadata-fullscreen-page">
+    <div class="metadata-fullscreen-card">
+
+        <div class="metadata-fullscreen-header">
+            <div>
+                <p class="metadata-label">GeoTrace Metadata</p>
+                <h1>Volledige metadata</h1>
+                <p>Alle beschikbare metadata uit de afbeelding.</p>
+            </div>
+
+            <a href="{{ url_for('analyse_detail', analyse_id=analyse_id) }}" class="analysis-back-button">
+                Terug naar analyse
+            </a>
+        </div>
+
+        {% if metadata_sections %}
+            {% for section in metadata_sections %}
+                <div class="metadata-section">
+                    <div class="metadata-section-header">
+                        <h2>{{ section.title }}</h2>
+                    </div>
+
+                    <div class="metadata-full-grid">
+                        {% for item in section["items"] %}
+                            <div class="metadata-full-item">
+                                <span>{{ item["label"] }}</span>
+                                <strong>{{ item["value"] }}</strong>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                Geen metadata beschikbaar.
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

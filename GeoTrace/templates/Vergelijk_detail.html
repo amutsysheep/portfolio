@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+Vergelijking resultaat
+{% endblock %}
+
+{% block content %}
+{% set answer = result.antwoord %}
+{% set comparison = answer.technische_vergelijking %}
+
+<div class="comparison-page">
+
+    <div class="comparison-card">
+
+        <div class="comparison-header">
+            <div>
+                <span>GEOTRACE COMPARISON</span>
+                <h1>Comparison View</h1>
+                <p>{{ answer.samenvatting }}</p>
+            </div>
+
+            <a href="{{ url_for('vergelijk_upload') }}" class="analysis-back-button">
+                Nieuwe vergelijking
+            </a>
+        </div>
+
+        <section class="comparison-view-panel">
+
+            <div class="comparison-images">
+
+                <div class="comparison-image-box">
+                    <div class="comparison-label">Image A</div>
+                    <img src="{{ result.image_1_url }}" alt="Afbeelding A">
+
+                    {% if result.afbeelding_1.analyse.ocr.fragmenten %}
+                        <div class="comparison-annotation annotation-one">
+                            OCR: {{ result.afbeelding_1.analyse.ocr.fragmenten[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="comparison-divider">
+                    <span>VS</span>
+                </div>
+
+                <div class="comparison-image-box">
+                    <div class="comparison-label">Image B</div>
+                    <img src="{{ result.image_2_url }}" alt="Afbeelding B">
+
+                    {% if result.afbeelding_2.analyse.ocr.fragmenten %}
+                        <div class="comparison-annotation annotation-two">
+                            OCR: {{ result.afbeelding_2.analyse.ocr.fragmenten[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </section>
+
+        <div class="comparison-bottom-grid">
+
+            <section class="analysis-panel">
+                <div class="panel-header">
+                    <h2>Difference Notes</h2>
+                </div>
+
+                <div class="comparison-notes">
+                    <p><strong>Resultaat:</strong> {{ comparison.resultaat }}</p>
+                    <p><strong>Verschilpercentage:</strong> {{ comparison.verschilpercentage }}</p>
+                    <p><strong>Risiconiveau:</strong> {{ answer.risiconiveau }}</p>
+
+                    {% if answer.belangrijkste_redenen %}
+                        <ul>
+                            {% for reason in answer.belangrijkste_redenen %}
+                                <li>{{ reason }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </section>
+
+            <section class="analysis-panel">
+                <div class="panel-header">
+                    <h2>Annotations List</h2>
+                </div>
+
+                <div class="comparison-notes">
+
+                    <p><strong>Objecten in beide afbeeldingen:</strong></p>
+                    <p>{{ answer.objecten.in_beide|join(", ") if answer.objecten.in_beide else "Geen" }}</p>
+
+                    <p><strong>Alleen in afbeelding A:</strong></p>
+                    <p>{{ answer.objecten.alleen_in_afbeelding_1|join(", ") if answer.objecten.alleen_in_afbeelding_1 else "Geen" }}</p>
+
+                    <p><strong>Alleen in afbeelding B:</strong></p>
+                    <p>{{ answer.objecten.alleen_in_afbeelding_2|join(", ") if answer.objecten.alleen_in_afbeelding_2 else "Geen" }}</p>
+
+                    <p><strong>Tekst alleen in A:</strong></p>
+                    <p>{{ answer.tekst.alleen_in_afbeelding_1|join(", ") if answer.tekst.alleen_in_afbeelding_1 else "Geen" }}</p>
+
+                    <p><strong>Tekst alleen in B:</strong></p>
+                    <p>{{ answer.tekst.alleen_in_afbeelding_2|join(", ") if answer.tekst.alleen_in_afbeelding_2 else "Geen" }}</p>
+
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block title %}
+Analyse wordt uitgevoerd
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/analyse_loading.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="analysis-loading-page">
+    <div class="analysis-loading-card">
+        <div class="loading-header">
+            <p class="page-label">GeoTrace Evidence</p>
+            <h1>Afbeelding wordt geanalyseerd</h1>
+            <p>
+                De afbeelding wordt gecontroleerd op metadata, tekst, objecten en locatiegegevens.
+            </p>
+        </div>
+
+        <div class="main-progress-wrapper">
+            <div class="main-progress-info">
+                <span id="progressTitle">Analyse voorbereiden...</span>
+                <strong id="progressPercent">0%</strong>
+            </div>
+
+            <div class="main-progress-bar">
+                <div class="main-progress-fill" id="mainProgressFill"></div>
+            </div>
+        </div>
+
+        <div class="loading-steps">
+            <div class="loading-step active" id="stepMetadata">
+                <div class="step-icon">
+                    <span></span>
+                </div>
+                <div class="step-content">
+                    <strong>Metadata uitlezen</strong>
+                    <p>Bestandsinformatie, camera-instellingen en EXIF-data worden verzameld.</p>
+                </div>
+                <div class="step-status">Bezig</div>
+            </div>
+
+            <div class="loading-step" id="stepOcr">
+                <div class="step-icon">
+                    <span></span>
+                </div>
+                <div class="step-content">
+                    <strong>OCR verwerken</strong>
+                    <p>Zichtbare tekst wordt gezocht en betrouwbaar uitgelezen.</p>
+                </div>
+                <div class="step-status">Wacht</div>
+            </div>
+
+            <div class="loading-step" id="stepObjects">
+                <div class="step-icon">
+                    <span></span>
+                </div>
+                <div class="step-content">
+                    <strong>Objecten herkennen</strong>
+                    <p>Relevante objecten en locatie-aanwijzingen worden geanalyseerd.</p>
+                </div>
+                <div class="step-status">Wacht</div>
+            </div>
+
+            <div class="loading-step" id="stepResult">
+                <div class="step-icon">
+                    <span></span>
+                </div>
+                <div class="step-content">
+                    <strong>Resultaat opbouwen</strong>
+                    <p>De analysepagina wordt klaargezet.</p>
+                </div>
+                <div class="step-status">Wacht</div>
+            </div>
+        </div>
+
+        <div class="loading-footer">
+            <div class="loading-pulse"></div>
+            <span id="loadingMessage">Analyse wordt gestart. Sluit dit venster niet.</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const analyseId = "{{ analyse_id }}";
+    const progressFill = document.getElementById("mainProgressFill");
+    const progressPercent = document.getElementById("progressPercent");
+    const progressTitle = document.getElementById("progressTitle");
+    const loadingMessage = document.getElementById("loadingMessage");
+
+    const steps = [
+        {
+            id: "stepMetadata",
+            title: "Metadata uitlezen...",
+            message: "EXIF-data, bestandsinformatie en camera-instellingen worden gecontroleerd.",
+            percentage: 25
+        },
+        {
+            id: "stepOcr",
+            title: "OCR verwerken...",
+            message: "De afbeelding wordt gecontroleerd op betrouwbare zichtbare tekst.",
+            percentage: 50
+        },
+        {
+            id: "stepObjects",
+            title: "Objecten herkennen...",
+            message: "Objecten, scenecontext en locatie-aanwijzingen worden geanalyseerd.",
+            percentage: 78
+        },
+        {
+            id: "stepResult",
+            title: "Resultaat opbouwen...",
+            message: "De analysepagina wordt voorbereid.",
+            percentage: 94
+        }
+    ];
+
+    let visualProgress = 0;
+    let currentStep = 0;
+    let analysisFinished = false;
+    let redirectUrl = null;
+
+    function setStepState(index) {
+        steps.forEach((step, stepIndex) => {
+            const element = document.getElementById(step.id);
+            const status = element.querySelector(".step-status");
+
+            element.classList.remove("active", "done");
+
+            if (stepIndex < index) {
+                element.classList.add("done");
+                status.textContent = "Klaar";
+            } else if (stepIndex === index) {
+                element.classList.add("active");
+                status.textContent = "Bezig";
+            } else {
+                status.textContent = "Wacht";
+            }
+        });
+
+        progressTitle.textContent = steps[index].title;
+        loadingMessage.textContent = steps[index].message;
+    }
+
+    function updateProgress() {
+        if (analysisFinished) {
+            visualProgress += 3;
+
+            if (visualProgress >= 100) {
+                visualProgress = 100;
+                progressFill.style.width = "100%";
+                progressPercent.textContent = "100%";
+
+                steps.forEach(step => {
+                    const element = document.getElementById(step.id);
+                    const status = element.querySelector(".step-status");
+
+                    element.classList.remove("active");
+                    element.classList.add("done");
+                    status.textContent = "Klaar";
+                });
+
+                progressTitle.textContent = "Analyse voltooid";
+                loadingMessage.textContent = "Je wordt doorgestuurd naar de analyse.";
+
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 700);
+
+                return;
+            }
+        } else {
+            if (visualProgress < 92) {
+                visualProgress += Math.random() * 1.8;
+            }
+        }
+
+        if (visualProgress >= 20 && currentStep === 0) {
+            currentStep = 1;
+            setStepState(currentStep);
+        }
+
+        if (visualProgress >= 45 && currentStep === 1) {
+            currentStep = 2;
+            setStepState(currentStep);
+        }
+
+        if (visualProgress >= 72 && currentStep === 2) {
+            currentStep = 3;
+            setStepState(currentStep);
+        }
+
+        progressFill.style.width = `${Math.floor(visualProgress)}%`;
+        progressPercent.textContent = `${Math.floor(visualProgress)}%`;
+
+        setTimeout(updateProgress, 180);
+    }
+
+    async function startAnalysis() {
+        try {
+            const response = await fetch(`/analyse/start/${analyseId}`, {
+                method: "POST"
+            });
+
+            const data = await response.json();
+
+            if (!data.success) {
+                progressTitle.textContent = "Analyse mislukt";
+                loadingMessage.textContent = data.error || "Er ging iets mis tijdens de analyse.";
+                document.querySelector(".analysis-loading-card").classList.add("failed");
+                return;
+            }
+
+            redirectUrl = data.redirect_url;
+            analysisFinished = true;
+        } catch (error) {
+            progressTitle.textContent = "Analyse mislukt";
+            loadingMessage.textContent = "Er kon geen verbinding worden gemaakt met de server.";
+            document.querySelector(".analysis-loading-card").classList.add("failed");
+        }
+    }
+
+    setStepState(0);
+    updateProgress();
+    startAnalysis();
+</script>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}
+Tijdlijn
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tijdlijn.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="timeline-page">
+
+    <div class="timeline-container">
+
+        <div class="timeline-header">
+            <div>
+                <p class="page-label">GeoTrace Evidence</p>
+                <h1>Evidence Timeline</h1>
+                <p>
+                    Bekijk chronologisch welke stappen zijn uitgevoerd tijdens de analyse.
+                </p>
+            </div>
+
+            <a href="{{ url_for('upload') }}" class="timeline-action-button">
+                Nieuwe analyse
+            </a>
+        </div>
+
+        <section class="timeline-card">
+
+            {% if timeline_items %}
+                <div class="timeline-list">
+
+                    {% for item in timeline_items %}
+                        <div class="timeline-item">
+
+                            <div class="timeline-marker">
+                                <div class="timeline-dot"></div>
+
+                                {% if not loop.last %}
+                                    <div class="timeline-line"></div>
+                                {% endif %}
+                            </div>
+
+                            <article class="timeline-content">
+
+                                <div class="timeline-icon">
+                                    {% if item.icon == "image" %}
+                                        🖼
+                                    {% elif item.icon == "metadata" %}
+                                        🧾
+                                    {% elif item.icon == "ocr" %}
+                                        🔎
+                                    {% elif item.icon == "object" %}
+                                        📦
+                                    {% elif item.icon == "check" %}
+                                        ✓
+                                    {% else %}
+                                        •
+                                    {% endif %}
+                                </div>
+
+                                <div class="timeline-info">
+                                    <div class="timeline-top">
+                                        <h2>{{ item.titel }}</h2>
+                                        <span>{{ item.type }}</span>
+                                    </div>
+
+                                    <p class="timeline-description">
+                                        {{ item.beschrijving }}
+                                    </p>
+
+                                    <div class="timeline-meta">
+                                        {% if item.datum and item.tijd %}
+                                            <span>Datum: {{ item.datum }}</span>
+                                            <span>Tijd: {{ item.tijd }}</span>
+                                        {% elif item.datum %}
+                                            <span>Datum/tijd: {{ item.datum }}</span>
+                                        {% else %}
+                                            <span>Datum/tijd onbekend</span>
+                                        {% endif %}
+
+                                        <span>Geanalyseerd door: {{ item.gebruiker }}</span>
+                                    </div>
+                                </div>
+
+                            </article>
+
+                        </div>
+                    {% endfor %}
+
+                </div>
+            {% else %}
+                <div class="timeline-empty-state">
+                    Geen tijdlijngegevens beschikbaar.
+                </div>
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</div>
+{% endblock %}

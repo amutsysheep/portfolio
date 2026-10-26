@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}
+OCR Resultaten
+{% endblock %}
+
+{% block content %}
+{% set detected_language = detected_language|default("Nog niet gedetecteerd") %}
+{% set translation_available = ocr_data.text_found %}
+{% set translated_text = translated_text|default("") %}
+
+<div class="ocr-page">
+
+    <div class="ocr-header">
+        <div>
+            <h1>OCR Translation</h1>
+            <p>Bekijk de gevonden OCR tekst, gedetecteerde taal en vertaling naar Nederlands.</p>
+        </div>
+
+        <a href="{{ url_for('analyse_detail', analyse_id=analyse_id) }}" class="ocr-back-button">
+            Terug naar analyse
+        </a>
+    </div>
+
+    <div class="ocr-layout">
+
+        <section class="ocr-image-card">
+            <div class="ocr-card-title">
+                <span class="ocr-icon">▧</span>
+                <h2>Image Preview</h2>
+            </div>
+
+            <div class="ocr-image-wrapper">
+                {% if image_preview.available %}
+                    <img src="{{ image_preview.url }}" alt="{{ image_preview.filename }}">
+                {% else %}
+                    <div class="ocr-empty-state">
+                        Geen afbeelding beschikbaar
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <div class="ocr-side-column">
+
+            <section class="ocr-results-card">
+                <div class="ocr-card-title">
+                    <span class="ocr-icon">▤</span>
+                    <h2>OCR Text</h2>
+                </div>
+
+                {% if ocr_data.text_found and ocr_data.fragments %}
+                    <div class="ocr-text-list">
+                        {% for fragment in ocr_data.fragments %}
+                            <div class="ocr-text-line">
+                                {{ fragment }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="ocr-empty-state small">
+                        Geen betrouwbare OCR tekst gevonden.
+                    </div>
+                {% endif %}
+            </section>
+
+            <section class="ocr-results-card">
+                <div class="ocr-card-title">
+                    <span class="ocr-icon">🌐</span>
+                    <h2>Detected Language</h2>
+                </div>
+
+                <div class="detected-language-box" id="detectedLanguageBox">
+                    {{ detected_language }}
+                </div>
+
+                {% if translation_available %}
+                    <p class="translation-status success" id="translationStatus">
+                        Vertaling is mogelijk voor deze OCR tekst.
+                    </p>
+                {% else %}
+                    <p class="translation-status error" id="translationStatus">
+                        Vertaling is niet mogelijk omdat er geen OCR tekst is gevonden.
+                    </p>
+                {% endif %}
+            </section>
+
+            <section class="ocr-results-card">
+                <div class="ocr-card-title">
+                    <span class="ocr-icon">⇄</span>
+                    <h2>Translation</h2>
+                </div>
+
+                <button
+                    type="button"
+                    class="translate-button"
+                    id="translateButton"
+                    {% if not translation_available %}disabled{% endif %}
+                >
+                    Vertalen naar Nederlands
+                </button>
+
+                <div class="translation-output" id="translationOutput">
+                    {% if translated_text %}
+                        {{ translated_text }}
+                    {% else %}
+                        Klik op vertalen om de gevonden tekst naar Nederlands te vertalen.
+                    {% endif %}
+                </div>
+
+                <p class="translation-warning">
+                    Vertaling is niet altijd 100% accuraat.
+                </p>
+            </section>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const translateButton = document.getElementById("translateButton");
+const translationOutput = document.getElementById("translationOutput");
+const detectedLanguageBox = document.getElementById("detectedLanguageBox");
+const translationStatus = document.getElementById("translationStatus");
+
+if (translateButton) {
+    translateButton.addEventListener("click", async () => {
+        translateButton.disabled = true;
+        translateButton.textContent = "Vertalen...";
+        translationOutput.textContent = "Vertaling wordt uitgevoerd. Even geduld...";
+
+        try {
+            const response = await fetch("{{ url_for('translate_ocr', analyse_id=analyse_id) }}", {
+                method: "POST"
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                translationOutput.textContent = data.error || data.message || "Vertaling is mislukt.";
+                translationStatus.textContent = "Vertaling is mislukt.";
+                translationStatus.className = "translation-status error";
+                translateButton.disabled = false;
+                translateButton.textContent = "Opnieuw vertalen";
+                return;
+            }
+
+            detectedLanguageBox.textContent = data.detected_language || "Onbekend";
+
+            if (data.translation_available && data.translated_text) {
+                translationOutput.textContent = data.translated_text;
+                translationStatus.textContent = "Vertaling succesvol uitgevoerd.";
+                translationStatus.className = "translation-status success";
+            } else {
+                translationOutput.textContent = data.message || "Geen vertaling beschikbaar.";
+                translationStatus.textContent = "Vertaling is niet beschikbaar.";
+                translationStatus.className = "translation-status error";
+            }
+
+            translateButton.disabled = false;
+            translateButton.textContent = "Opnieuw vertalen";
+
+        } catch (error) {
+            console.error(error);
+
+            translationOutput.textContent = "Er ging iets mis tijdens het vertalen.";
+            translationStatus.textContent = "Vertaling is mislukt.";
+            translationStatus.className = "translation-status error";
+
+            translateButton.disabled = false;
+            translateButton.textContent = "Opnieuw vertalen";
+        }
+    });
+}
+</script>
+{% endblock %}

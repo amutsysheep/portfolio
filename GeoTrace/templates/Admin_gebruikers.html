@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %}Gebruikersbeheer{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gebruikers.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="gebruikers-page">
+  <div class="gebruikers-header">
+    <h1>Gebruikersbeheer</h1>
+    <p>Maak nieuwe accounts aan en beheer bestaande gebruikers.</p>
+  </div>
+
+  <div class="gebruikers-layout">
+    <section class="gebruikers-card aanmaken-card">
+      <div class="card-header">
+        <h2>Gebruiker aanmaken</h2>
+      </div>
+
+      <form method="post" class="gebruiker-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="gebruiker@email.nl" required>
+        </div>
+
+        <div class="form-group">
+          <label for="voornaam">Voornaam</label>
+          <input type="text" id="voornaam" name="voornaam" placeholder="Voornaam" required>
+        </div>
+
+        <div class="form-group">
+          <label for="tussenvoegsel">Tussenvoegsel</label>
+          <input type="text" id="tussenvoegsel" name="tussenvoegsel" placeholder="Bijv. van, de, van der">
+        </div>
+
+        <div class="form-group">
+          <label for="achternaam">Achternaam</label>
+          <input type="text" id="achternaam" name="achternaam" placeholder="Achternaam" required>
+        </div>
+
+        <div class="form-group">
+          <label for="rol_id">Rol</label>
+          <select id="rol_id" name="rol_id" required>
+            <option value="">Selecteer rol</option>
+            <option value="1">Admin</option>
+            <option value="2">Gebruiker</option>
+          </select>
+        </div>
+
+        <div class="password-preview">
+          <span>Tijdelijk wachtwoord</span>
+          <strong>Wordt automatisch gegenereerd</strong>
+        </div>
+
+        <p class="form-note">
+          Het tijdelijke wachtwoord wordt automatisch naar de gebruiker gemaild.
+        </p>
+
+        <button type="submit" class="primary-button">Gebruiker aanmaken</button>
+      </form>
+    </section>
+
+    <section class="gebruikers-card overzicht-card">
+      <div class="card-header overzicht-header">
+        <div>
+          <h2>Bestaande gebruikers</h2>
+          <p>Bekijk en beheer alle accounts.</p>
+        </div>
+
+        <input type="text" class="search-input" placeholder="Zoeken...">
+      </div>
+
+      <div class="table-wrapper">
+        <table class="gebruikers-table">
+          <thead>
+            <tr>
+              <th>Naam</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Status</th>
+              <th>Acties</th>
+            </tr>
+          </thead>
+
+          <tbody>
+  {% for account in accounts %}
+    <tr>
+      <td>
+        {{ account["Voornaam"] }}
+        {% if account["Tussenvoegsel"] %}
+          {{ account["Tussenvoegsel"] }}
+        {% endif %}
+        {{ account["Achternaam"] }}
+      </td>
+
+      <td>{{ account["Email"] }}</td>
+
+      <td>{{ account["Rol"] }}</td>
+
+      <td>
+        <span class="status actief">Actief</span>
+      </td>
+
+<td class="actions">
+  <a href="{{ url_for('admin_edit_email', login_id=account['Login_ID']) }}">Email bewerken</a>
+  <span>|</span>
+  <a href="{{ url_for('admin_reset_password', login_id=account['Login_ID']) }}">Wachtwoord resetten</a>
+</td>
+    </tr>
+  {% else %}
+    <tr>
+      <td colspan="5">Geen gebruikers gevonden.</td>
+    </tr>
+  {% endfor %}
+</tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %}
